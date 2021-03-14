@@ -102,8 +102,8 @@ this.setState({postUser: a.target.value})
   render() {
   return (
     <div className="App">
-      {this.state.hamburgerflag2 ? 
-      <div id='hammenu' >
+      
+      <div  id={this.state.hamburgerflag2 ? 'hammenu' : 'hammenu2'}>
         <button className='hmbtn' id='cibtn'>Contact Info</button>
         <button className='hmbtn' id='ccbtn'>Color Change</button>
         <button className='hmbtn' id='gwbtn'>Graffiti Wall</button>
@@ -111,8 +111,7 @@ this.setState({postUser: a.target.value})
         <button className='hmbtn' id='epbtn'>EasyPGP</button>
         <button className='hmbtn' id='csbtn'>Coming Soon</button>
         <span id='signature1'>Eric Sanchirico</span>
-      </div> : null
-      }
+      </div>
       <div id='btncont'>
          <img id='hamburgermenu' alt='menuicon' src='../hamburgericon.png' onClick={this.showhambmenu}></img>
          <img id='homemenu' alt='homeicon' src="../homeicon.png"></img>

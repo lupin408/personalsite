@@ -362,6 +362,21 @@ box-shadow: 0px 0px 2px 1px grey ;
     
   animation-direction: alternate;
   }
+
+  #hammenu2 {
+    position: fixed;
+    top: -345px;
+    left: 6%;
+    height: 300px;
+    width: 200px;
+    background-color:rgb(61, 61, 61) ;
+    box-shadow: 0px 0px 2px 1px darkorange;
+   
+  
+animation-duration: 0.3s;
+animation-name: slideout1;
+
+  }
   
   @keyframes slidein2 {
     from {
@@ -372,5 +387,14 @@ box-shadow: 0px 0px 2px 1px grey ;
     to {
       margin-top: 0px;
      
+    }
+  }
+
+  @keyframes slideout1 {
+    from {
+      margin-top: 20%;
+    }
+    to {
+      margin-top: -10%;
     }
   }
