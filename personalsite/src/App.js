@@ -39,14 +39,14 @@ myHeaders.append("Content-Type", "application/json");
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
+ // headers: myHeaders,
   
   redirect: 'follow'
 };
 
-fetch("http://localhost:3001/entries?pagenum=0", requestOptions)
+fetch("http://ericsanchiri.co/entries?pagenum=0", requestOptions)
   .then(response => response.text())
-  .then(result => this.setState({posts: JSON.parse(result)}))
+  .then(result => {console.log(result); this.setState({posts: JSON.parse(result)})})
   .catch(error => console.log('error', error));
   
   }
@@ -93,7 +93,7 @@ this.setState({postUser: a.target.value})
       redirect: 'follow'
     };
     
-    fetch("http://localhost:3001/newpost", requestOptions)
+    fetch("http://ericsanchiri.co/newpost", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
