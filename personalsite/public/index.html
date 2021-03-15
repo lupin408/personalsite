@@ -68,9 +68,9 @@ var canvas, ctx, circ, nodes, mouse, SENSITIVITY, SIBLINGS_LIMIT, DENSITY, NODES
 SENSITIVITY = 90;
  
 // more siblings == bigger node
-SIBLINGS_LIMIT = 10;
+SIBLINGS_LIMIT = 6;
 // default node margin
-DENSITY = 45;
+DENSITY = 50;
 // total number of nodes used (incremented after creation)
 NODES_QTY = 0;
 // avoid nodes spreading
@@ -163,7 +163,7 @@ function initNodes() {
 }
 
 function calcDistance(node1, node2) {
-  return Math.sqrt(Math.pow(node1.x - node2.x, 2) + (Math.pow(node1.y - node2.y, 2)));
+  return  Math.sqrt(Math.pow(node1.x - node2.x, 2) + (Math.pow(node1.y - node2.y, 2)));
 }
 
 function findSiblings() {

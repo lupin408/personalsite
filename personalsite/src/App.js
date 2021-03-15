@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 //import './App.css';
 import React from 'react';
-import {Animated} from "react-animated-css";
+
 import Postbox from './Postbox.js';
 class App extends React.Component {
   constructor(props) {
@@ -38,15 +38,13 @@ myHeaders.append("Content-Type", "application/json");
 //var raw = JSON.stringify({"pagenum":"0"});
 
 var requestOptions = {
-  method: 'GET',
-  //headers: myHeaders,
-  
+  method: 'GET',  
   redirect: 'follow'
 };
 
 fetch("http://ericsanchiri.co/entries?pagenum=0", requestOptions)
   .then(response => response.text())
-  .then(result => this.setState({posts: JSON.parse(result)}))
+  .then(result => {console.log(result); this.setState({posts: JSON.parse(result)})})
   .catch(error => console.log('error', error));
   
   }
@@ -133,20 +131,7 @@ this.setState({postUser: a.target.value})
         <div id='posttitle'>Posts</div>
         <div id='maincontentpane'>
         <Postbox msgs={this.state.posts} reltimefunc={this.getRelativeTime}/>
-        <div id='userpost'>
-          <span id='textboxtitle'>Have something interesting and related to Computer Science that you want to post? Anyone can contribute content to my site (not that anyone visits here)!</span>
-          <div id='formcontainer'>
-          <form  id="usrform" onSubmit={this.postusercontent}>
-           <input type="text" name="usrposttitle" defaultValue='Title' id='usrposttitle' onChange={this.handleChange3} ></input> <input type="text" defaultValue='Name' id='usrname' name="usrname" onChange={this.handleChange1}></input>
-          <textarea id='usrpost1' name="usrpost" form="usrform" rows="26" cols="100" onChange={this.handleChange2}>...</textarea>
-  
-  <input type="submit" id='usrsubmit1' value='Post' ></input>
-  <div id='newpostlabel'> New Post</div>
-</form>
-
-
-</div>
-        </div>
+     
         </div>
     </div>
   );
