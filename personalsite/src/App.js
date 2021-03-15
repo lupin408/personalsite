@@ -38,9 +38,7 @@ myHeaders.append("Content-Type", "application/json");
 //var raw = JSON.stringify({"pagenum":"0"});
 
 var requestOptions = {
-  method: 'GET',
- // headers: myHeaders,
-  
+  method: 'GET',  
   redirect: 'follow'
 };
 
@@ -127,8 +125,8 @@ this.setState({postUser: a.target.value})
         Alot of my work has been with optimizing low-end AWS EC2 servers (for example, creating effective custom load-balancers that allow t2.micro EC2 instances to handle upwards of
         dozens of thousands of RPS throughput).
         I have had an interest in cryptography since before I was an engineer (you can visit my cryptographic hobby-project here) and alot of my work has been 
-        dedicated towards evangalizing cryptography and privacy, improving access to encryption and cryptography, so naturally I was one of the earlier people involved in the cryptocurrency scene, way back in 2011.
-        After participating in the space while it went though a decade of explosive growth, I decided to shift my professional focus towards contributing to this burgeoning industry.
+        dedicated towards evangalizing cryptography and privacy, improving access to encryption and cryptography.
+        After participating in the blockchain space while it went though a decade of explosive growth, I decided to shift my professional focus towards contributing to this burgeoning industry.
         I currently write dApps on the Ethereum blockchain, with my current timesink being a PGP encrypted communications app utilizing client-side web3 providers as credentials.</p>
         <div id='posttitle'>Posts</div>
         <div id='maincontentpane'>
