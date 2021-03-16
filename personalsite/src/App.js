@@ -7,28 +7,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [  {
-        posttitle: 'Post #2',
-        postcontent: 'I made some cosmetic changes to the site, mostly worked on the background. Made a node and branch design that follows the cursor, tuned the colors alot too. I was very close to going with a color-changer that I implemented that made the branhces look like they were glowing, rather than a static color. After playing with it I decided to keep them a solid color becuase the color-fluctuation made it look flickery. Changed the background to white.',
-        posttime: 1615566327805,
-        postuser: 'Eric'
-      }, {
-        posttitle: 'I am starting my own site',
-        postcontent: "It's about time I created a site. I finally gave in and made one. I am creating this from scratch obviously, using AWS, MySQL, and React. I would never be caught dead using Squarespace or another cookie-cutter website service. It's gonna take me a little time making it look pretty and putting pictures on it. Hopefully I'll look back on this in a decade and remember all the things I have done",
-        posttime: 1615525759206,
-        postuser: 'Eric'
-    }
+      posts: [ 
 ],
-postUser: '',
-postContent: '',
-postTitle: '',
+comments: [],
+
 hamburgerflag2: false
     };
   this.getRelativeTime = this.getRelativeTime.bind(this);
-  this.postusercontent = this.postusercontent.bind(this);
-  this.handleChange1 = this.handleChange1.bind(this);
-  this.handleChange2 = this.handleChange2.bind(this);
-  this.handleChange3 = this.handleChange3.bind(this);
+  
+  
   this.showhambmenu = this.showhambmenu.bind(this);
   }
   componentDidMount(b) {
@@ -44,11 +31,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://ericsanchiri.co/entries?pagenum=0", requestOptions)
+fetch("http://localhost:3001/entries?pagenum=0", requestOptions)
   .then(response => response.text())
-  .then(result => {console.log(result); this.setState({posts: JSON.parse(result)})})
+  .then(result => {console.log(result); this.setState({posts: JSON.parse(result).posts, comments: JSON.parse(result).comments})})
   .catch(error => console.log('error', error));
-  
+
+ 
   }
   getRelativeTime = (d1, d2 = new Date()) => {
     var elapsed = d1 - d2
@@ -66,39 +54,13 @@ fetch("http://ericsanchiri.co/entries?pagenum=0", requestOptions)
       if (Math.abs(elapsed) > units[u] || u === 'second') 
         return rtf.format(Math.round(elapsed/units[u]), u)
   }
-  handleChange1(a) {
-this.setState({postUser: a.target.value})
-  }
-  handleChange2(a) {
-    this.setState({postContent: a.target.value})
-  }
-  handleChange3(a) {
-    this.setState({postTitle: a.target.value})
-      }
+
     showhambmenu(a) {
      console.log('hi')
     this.setState({hamburgerflag2: !this.state.hamburgerflag2})
       
     }
-  postusercontent(a) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    
-    var raw = JSON.stringify({"postcontent": this.state.postContent, "postuser": this.state.postUser, "posttitle": this.state.postTitle, "posttime": +new Date()});
-    
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-    
-    fetch("http://ericsanchiri.co/newpost", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-   
-  }
+ 
   render() {
   return (
     <div className="App">
@@ -127,12 +89,12 @@ this.setState({postUser: a.target.value})
         Alot of my work has been with optimizing low-end AWS EC2 servers (for example, creating effective custom load-balancers that allow t2.micro EC2 instances to handle upwards of
         dozens of thousands of RPS throughput).
         I have had an interest in cryptography since before I was an engineer (you can visit my cryptographic hobby-project here) and alot of my work has been 
-        dedicated towards evangalizing cryptography and privacy, improving access to encryption and cryptography, so naturally I was one of the earlier people involved in the cryptocurrency scene, way back in 2011.
-        After participating in the space while it went though a decade of explosive growth, I decided to shift my professional focus towards contributing to this burgeoning industry.
+        dedicated towards evangalizing cryptography &amp; privacy and improving access to encryption and cryptography.
+        After participating in the blockchain space while it went though a decade of explosive growth, I decided to shift my professional focus towards contributing to this burgeoning industry.
         I currently write dApps on the Ethereum blockchain, with my current timesink being a PGP encrypted communications app utilizing client-side web3 providers as credentials.</p>
         <div id='posttitle'>Posts</div>
         <div id='maincontentpane'>
-        <Postbox msgs={this.state.posts} reltimefunc={this.getRelativeTime}/>
+        <Postbox msgs={this.state.posts} comments={JSON.stringify(this.state.comments)} reltimefunc={this.getRelativeTime}/>
      
         </div>
     </div>

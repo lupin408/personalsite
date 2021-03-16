@@ -6,18 +6,52 @@ class CommentSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      commentvisflag: false
+      commentvisflag: false,
+      comments: [],
+      postUser: '',
+postContent: '',
+postTitle: '',
+realpostTitle: ''
     };
   
   this.postusercontent = this.postusercontent.bind(this);
   this.showthecommentbox = this.showthecommentbox.bind(this);
+  this.handleChange1 = this.handleChange1.bind(this);
+  this.handleChange2 = this.handleChange2.bind(this);
+  this.handleChange3 = this.handleChange3.bind(this);
   }
-
+  componentDidMount() {
+      let comms = [];
+      //console.log(this.props.comments)
+      let fin = JSON.parse(this.props.comments)
+      console.log(fin, this.props.posttitle)
+  if (fin.length > 0) {
+      for (let i = 0; i < fin.length; i++) {
+        
+            if (fin[i].forpost === this.props.posttitle) {
+               console.log('hi')
+                comms.push(fin[i])
+            }
+      }
+  }
+  this.setState({comments: comms})
+  }
+  handleChange1(a) {
+    this.setState({postUser: a.target.value})
+      }
+      handleChange2(a) {
+        this.setState({postContent: a.target.value})
+      }
+      handleChange3(a) {
+        this.setState({postTitle: a.target.value})
+        console.log(a.target.value)
+          }
   postusercontent(a) {
+      a.preventDefault();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     
-    var raw = JSON.stringify({"postcontent": this.state.postContent, "postuser": this.state.postUser, "posttitle": this.state.postTitle, "posttime": +new Date()});
+    var raw = JSON.stringify({"commcontent": this.state.postContent, "commuser": this.state.postUser, "commtitle": this.state.postTitle, "commtime": +new Date(), "forpost": this.props.posttitle});
     
     var requestOptions = {
       method: 'POST',
@@ -26,7 +60,7 @@ class CommentSection extends React.Component {
       redirect: 'follow'
     };
     
-    fetch("http://ericsanchiri.co/newcomment", requestOptions)
+    fetch("http://localhost:3001/newcomment", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -39,6 +73,14 @@ class CommentSection extends React.Component {
   render() {
   return (
       <div className='commentmakingsection'>
+          
+          {this.state.comments.length > 0 ? this.state.comments.map(b => 
+          <div className='commspot'> <div className='commtitle'>Comments</div>
+            <div className='commuser'>{b.usrname}:</div>
+            <div className='commbody'>{b.commentcontent}</div>
+            </div>
+            ): null}
+            
           <button className='makeacomment' onClick={this.showthecommentbox}>Comment</button>
     {this.state.commentvisflag ? <div className='userpost'>
 
