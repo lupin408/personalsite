@@ -25,9 +25,7 @@ myHeaders.append("Content-Type", "application/json");
 //var raw = JSON.stringify({"pagenum":"0"});
 
 var requestOptions = {
-  method: 'GET',
- // headers: myHeaders,
-  
+  method: 'GET',  
   redirect: 'follow'
 };
 
