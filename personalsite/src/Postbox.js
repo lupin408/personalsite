@@ -9,7 +9,7 @@ var Postbox = (props) => (
         <span> {props.reltimefunc(a.posttime)}</span>
         <div class='encmsgs'>{a.postcontent}</div>
         
-        <CommentSection />
+        <CommentSection posttitle={a.posttitle} comments={props.comments}/>
         
     </div>
     

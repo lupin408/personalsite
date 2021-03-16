@@ -22,9 +22,20 @@ app.get('/entries', (req, res) => {
   db.query('SELECT * FROM blogposts ORDER BY posttime DESC LIMIT '+(req.query.pagenum*10)+', 10', [], (err, re) => {
     if (err) {
       console.error(err)
+      console.log('error1')
       res.send('error querying MySQL')
     } else if (re) {
-res.send(JSON.stringify(re))
+      console.log('hi')
+      db.query('SELECT * FROM blogcomments', [], (e, r) => {
+        if (e) {
+          console.error(e)
+        } else if (r) {
+          console.log('error0')
+          res.send(JSON.stringify({posts: re, comments: r}))
+        }
+      
+      })
+
     }
   } )
    
@@ -41,7 +52,18 @@ app.post('/newpost', (req, res) => {
   })
 })
 
-
+app.post('/newcomment', (req, res) => {
+  db.query('INSERT INTO blogcomments (usrname, commentcontent,  commenttime, forpost, commtitle) VALUES (?, ?, ?, ?, ?)', [req.body.commuser, req.body.commcontent, req.body.commtime, req.body.forpost, req.body.commtitle], (err, re) => {
+    if (err) {
+      console.error(err)
+      console.log('bad')
+      res.send('MySQL insert query failure. It\'s possible your comment was too long')
+    } else if (re) {
+      console.log('good')
+      res.send('Comment successfully submitted')
+    }
+  })
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
