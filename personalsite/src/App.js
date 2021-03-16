@@ -29,7 +29,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://localhost:3001/entries?pagenum=0", requestOptions)
+fetch("http://ericsanchiri.co/entries?pagenum=0", requestOptions)
   .then(response => response.text())
   .then(result => {console.log(result); this.setState({posts: JSON.parse(result).posts, comments: JSON.parse(result).comments})})
   .catch(error => console.log('error', error));
