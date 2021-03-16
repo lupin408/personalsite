@@ -60,7 +60,7 @@ realpostTitle: ''
       redirect: 'follow'
     };
     
-    fetch("http://localhost:3001/newcomment", requestOptions)
+    fetch("http://ericsanchiri.co/newcomment", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
