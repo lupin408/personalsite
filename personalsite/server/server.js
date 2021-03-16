@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
 
-const PORT = 3001;
+const PORT = 80;
 app.get('/entries', (req, res) => {
   //var pagenum = req.body.pagenum
   db.query('SELECT * FROM blogposts ORDER BY posttime DESC LIMIT '+(req.query.pagenum*10)+', 10', [], (err, re) => {
